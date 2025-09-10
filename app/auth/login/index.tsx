@@ -1,74 +1,94 @@
-import React, { useRef, useState } from "react";
-import { Alert, KeyboardAvoidingView, Pressable, ScrollView, TextInput, View } from "react-native";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 
-import { useAuthStore } from "@/presentation/auth/store/useAuthStore";
-import { ThemedText } from "@/presentation/theme/components/ThemedText";
-import { useThemeColor } from "@/presentation/theme/hooks/useThemeColor";
-import { router } from "expo-router";
+import { useLogin } from "@/presentation/hooks/auth/login/useLogin";
+import { Colors, Fonts } from "@/presentation/styles/global-styles";
+import { CustomButton } from "@/presentation/theme/components/CustomButton";
+import { CustomFormView } from "@/presentation/theme/components/CustomFormView";
+import { CustomInput } from "@/presentation/theme/components/CustomInput";
+import { CustomLink } from "@/presentation/theme/components/CustomLink";
 
-const LoginScreen = () => {
-  const { login } = useAuthStore();
-  const [isActive, setisActive] = useState(false);
-
-  const primaryColor = useThemeColor({}, "primary");
-  const textColor = useThemeColor({}, "text");
-
-  const [form, setform] = useState({
-    email: "",
-    password: "",
-  });
-
-  const onLogin = async () => {
-    const { email, password } = form;
-    const wasSuccessful = await login(email, password);
-
-    if (wasSuccessful) {
-      router.replace("/winnix/(home)");
-      return;
-    }
-    Alert.alert("Error", "credenciales no validas");
-  };
-
-  //Referencia para que cuando se toque el view haga focus en el input
-  const inputRef = useRef<TextInput>(null);
+const Login = () => {
+  const {
+    // Properties
+    //Methods
+    control,
+    handleSubmit,
+    errors,
+    isSubmitting,
+    isDisabled,
+    onLogin,
+  } = useLogin();
 
   return (
-    <KeyboardAvoidingView behavior='padding' style={{ flex: 1, justifyContent: "center", alignContent: "center", paddingTop: 70 }}>
-      <ScrollView>
-        <ThemedText>Login Screen</ThemedText>
-        <View onTouchStart={() => inputRef.current?.focus()}>
-          <TextInput
-            ref={inputRef}
-            onChangeText={(value) => setform({ ...form, email: value })}
-            value={form.email}
-            style={{ borderColor: isActive ? primaryColor : "#ccc", color: "#fff" }}
-            onFocus={() => setisActive(true)}
-            onBlur={() => setisActive(false)}
-            placeholder='Correo electronico'
-            keyboardType='email-address'
-            autoCapitalize='none'
-          />
-        </View>
-        <View>
-          <TextInput
-            ref={inputRef}
-            onChangeText={(value) => setform({ ...form, password: value })}
-            value={form.password}
-            style={{ borderColor: isActive ? primaryColor : "#ccc", color: "#fff" }}
-            onFocus={() => setisActive(true)}
-            onBlur={() => setisActive(false)}
-            placeholder='contraseña'
-            keyboardType='email-address'
-            autoCapitalize='none'
-          />
-        </View>
+    <CustomFormView>
+      <View style={styles.view}>
+        <Text style={styles.title}>Bienvenid@</Text>
 
-        <Pressable onPress={onLogin} style={{ margin: 10, backgroundColor: "violet" }}>
-          <ThemedText>Ingresar</ThemedText>
-        </Pressable>
-      </ScrollView>
-    </KeyboardAvoidingView>
+        <CustomInput
+          name='email'
+          control={control}
+          placeholder='ejemplo@google.com'
+          label='Usuario o correo electrónico'
+          iconRight='mail-outline'
+          keyboardType='email-address'
+          errorMessage={errors.email?.message}
+        />
+
+        <CustomInput
+          name='password'
+          control={control}
+          placeholder='Contraseña'
+          label='Contraseña'
+          iconRight='eye-off-outline'
+          isPassword
+          errorMessage={errors.password?.message}
+        />
+
+        <CustomLink label='Recordar contraseña' href='/' style={styles.rememberPassword} />
+
+        <CustomButton label={isSubmitting ? "Ingresando..." : "Ingresar"} onPress={handleSubmit(onLogin)} icon='football-outline' disabled={isDisabled || isSubmitting} />
+
+        <View style={styles.signUpContainer}>
+          <Text style={styles.signUpText}>¿No tienes cuenta?</Text>
+          <CustomLink label='Registrate' href='/auth/register' />
+        </View>
+      </View>
+    </CustomFormView>
   );
 };
 
-export default LoginScreen;
+export default Login;
+
+const styles = StyleSheet.create({
+  view: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: Colors.dark,
+    gap: 20,
+    padding: 20,
+    minHeight: "100%",
+  },
+  title: {
+    fontSize: Fonts.extraLarge,
+    fontWeight: "bold",
+    color: Colors.primary,
+  },
+  rememberPassword: {
+    width: "auto",
+    alignSelf: "flex-end",
+  },
+  signUpContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    marginTop: 30,
+  },
+  signUpText: {
+    color: Colors.light,
+    fontWeight: "bold",
+    fontSize: 20,
+  },
+});

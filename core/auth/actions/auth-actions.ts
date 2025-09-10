@@ -36,4 +36,14 @@ export const authActions = {
   logout: async () => {
     await AuthAdapter.logout();
   },
+
+  signUp: async (params: any) => {
+    try {
+      const data = await AuthAdapter.register(params);
+      return mapAuthResponse(data);
+    } catch (error) {
+      console.error("authLogin error :>> ", error);
+      return null;
+    }
+  },
 };

@@ -52,9 +52,7 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
       set({ status: "unauthenticated", accessToken: undefined, refreshToken: undefined, user: undefined });
       return;
     }
-
     set({ status: "authenticated", accessToken: resp.accessToken, refreshToken: resp.refreshToken, user: { email: resp.email } });
-
     return;
   },
 

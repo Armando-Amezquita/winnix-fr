@@ -8,8 +8,10 @@ type LoginPayload = {
 
 type RegisterPayload = {
   email: string;
+  username: string;
   password: string;
-  name: string;
+  confirmPassword: string;
+  isChecked: boolean;
 };
 
 export const AuthAdapter = {
@@ -28,7 +30,16 @@ export const AuthAdapter = {
   },
 
   register: async (payload: RegisterPayload) => {
-    const response = await authFetcher.instance.post("/auth/register", payload);
+    const response = await authFetcher.instance.post("/auth/signup", payload);
+
+    if (response.data?.accessToken) {
+      await SecureStorageAdapter.setItem("accessToken", response.data.accessToken);
+    }
+
+    if (response.data?.refreshToken) {
+      await SecureStorageAdapter.setItem("refreshToken", response.data.refreshToken);
+    }
+
     return response.data;
   },
 
