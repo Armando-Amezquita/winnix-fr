@@ -1,40 +1,39 @@
-import { produtsApi } from "../api/productsApi";
+import { AuthAdapter } from "../api/auth.adapter";
 
-export interface AuthResponse {
+export interface AuthUser {
   email: string;
-  token: string;
   accessToken: string;
   refreshToken: string;
 }
 
-const returnUserToken = (data: AuthResponse): { email: string; accessToken: string; refreshToken: string } => {
-  const { email, accessToken, refreshToken } = data;
-  console.log("data :>> ", data);
+const mapAuthResponse = (data: any): AuthUser => ({
+  email: data.email,
+  accessToken: data.accessToken,
+  refreshToken: data.refreshToken,
+});
 
-  return { email, accessToken, refreshToken };
-};
+export const authActions = {
+  login: async (email: string, password: string): Promise<AuthUser | null> => {
+    try {
+      const data = await AuthAdapter.login({ email, password });
+      return mapAuthResponse(data);
+    } catch (error) {
+      console.error("authLogin error :>> ", error);
+      return null;
+    }
+  },
 
-export const authLogin = async (email: string, password: string) => {
-  try {
-    const { data } = await produtsApi.post<AuthResponse>("/auth/login-email", {
-      email,
-      password,
-    });
-    return returnUserToken(data);
-  } catch (error) {
-    console.log("error :>> ", error);
-    return null;
-  }
-};
+  checkStatus: async (): Promise<AuthUser | null> => {
+    try {
+      const data = await AuthAdapter.refreshToken();
+      return data ? mapAuthResponse(data) : null;
+    } catch (error) {
+      console.error("authCheckStatus error :>> ", error);
+      return null;
+    }
+  },
 
-export const authCheckStatus = async () => {
-  try {
-    const { data } = await produtsApi.get<AuthResponse>("/auth/check-status");
-    console.log("data :>> ", data);
-
-    return returnUserToken(data);
-  } catch (error) {
-    console.log("error authCheckStatus:>> ", error);
-    return null;
-  }
+  logout: async () => {
+    await AuthAdapter.logout();
+  },
 };

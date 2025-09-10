@@ -13,8 +13,6 @@ export default function RootLayout() {
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
 
-  console.log("here");
-
   if (!loaded) {
     // Async font loading only occurs in development.
     return null;
@@ -25,9 +23,7 @@ export default function RootLayout() {
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name='auth' />
-        <Stack.Screen name='(product-app)' />
-        {/* <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-        <Stack.Screen name='+not-found' /> */}
+        <Stack.Screen name='winnix' />
       </Stack>
       <StatusBar style='auto' />
     </ThemeProvider>

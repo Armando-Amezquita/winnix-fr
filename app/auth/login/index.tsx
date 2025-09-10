@@ -20,7 +20,6 @@ const LoginScreen = () => {
 
   const onLogin = async () => {
     const { email, password } = form;
-    console.log("form :>> ", form);
     const wasSuccessful = await login(email, password);
 
     if (wasSuccessful) {
@@ -34,7 +33,7 @@ const LoginScreen = () => {
   const inputRef = useRef<TextInput>(null);
 
   return (
-    <KeyboardAvoidingView behavior='padding' style={{ flex: 1 }}>
+    <KeyboardAvoidingView behavior='padding' style={{ flex: 1, justifyContent: "center", alignContent: "center", paddingTop: 70 }}>
       <ScrollView>
         <ThemedText>Login Screen</ThemedText>
         <View onTouchStart={() => inputRef.current?.focus()}>
