@@ -23,7 +23,7 @@ const LoginScreen = () => {
     const wasSuccessful = await login(email, password);
 
     if (wasSuccessful) {
-      router.replace("/(products-app)/(home)");
+      router.replace("/winnix/(home)");
       return;
     }
     Alert.alert("Error", "credenciales no validas");
