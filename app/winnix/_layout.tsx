@@ -24,7 +24,11 @@ const CheckAuthenticationLayout = () => {
   }
 
   return (
-    <Drawer screenOptions={{ headerShown: true, headerRight: () => <Button title='Logout' color='red' onPress={logout} /> }}>
+    <Drawer
+      screenOptions={{
+        headerShown: true,
+        headerRight: () => <Button title='Logout' color='red' onPress={logout} />,
+      }}>
       {/* Un Drawer item que apunta al grupo de Tabs */}
       <Drawer.Screen
         name='tabs'

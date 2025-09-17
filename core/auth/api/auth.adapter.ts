@@ -16,7 +16,9 @@ type RegisterPayload = {
 
 export const AuthAdapter = {
   login: async (payload: LoginPayload) => {
+    console.log("payload :>> ", payload);
     const response = await authFetcher.instance.post("/auth/login-email", payload);
+    console.log("response :>> ", response);
 
     // Guardamos tokens si existen
     if (response.data?.accessToken) {

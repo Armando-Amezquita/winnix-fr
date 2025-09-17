@@ -15,7 +15,10 @@ const mapAuthResponse = (data: any): AuthUser => ({
 export const authActions = {
   login: async (email: string, password: string): Promise<AuthUser | null> => {
     try {
+      console.log("llega aqui");
       const data = await AuthAdapter.login({ email, password });
+      console.log("data :>> ", data);
+      console.log(data);
       return mapAuthResponse(data);
     } catch (error) {
       console.error("authLogin error :>> ", error);

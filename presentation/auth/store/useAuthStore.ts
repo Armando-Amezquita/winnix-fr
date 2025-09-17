@@ -42,6 +42,7 @@ export const useAuthStore = create<AuthState>()((set, get) => ({
 
   login: async (email: string, password: string) => {
     const resp = await authActions.login(email, password);
+    console.log("resp :>> ", resp);
     return get().changeStatus(resp?.accessToken, resp?.refreshToken, { email: resp?.email });
   },
 

@@ -19,7 +19,7 @@ export const UseSignUp = () => {
     const wasSuccessful = await authActions.signUp(payload);
 
     if (wasSuccessful) {
-      router.replace("/winnix/(home)");
+      router.replace("/winnix/tabs/dashboard/index");
       return;
     }
     Alert.alert("Error", "credenciales no validas");

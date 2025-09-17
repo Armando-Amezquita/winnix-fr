@@ -17,7 +17,7 @@ export const useLogin = () => {
     const wasSuccessful = await login(email, password);
 
     if (wasSuccessful) {
-      router.replace("/winnix/(home)");
+      router.replace("/winnix/tabs/dashboard");
       return;
     }
     Alert.alert("Error", "credenciales no validas");

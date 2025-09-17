@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
-import { TouchableWithoutFeedback, Keyboard } from "react-native";
+import { Keyboard, TouchableWithoutFeedback } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import { Colors } from "../../styles/global-styles";
 
 interface Props {
   children: ReactNode;
