@@ -1,8 +1,8 @@
-import { useForm, FieldValues, FieldErrors } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { FieldErrors, FieldValues, useForm } from "react-hook-form";
 import * as yup from "yup";
 
-export const useCustomForm = <T extends FieldValues>(schema: yup.ObjectSchema<T>) => {
+export const useCustomForm = <T extends FieldValues>(schema?: yup.ObjectSchema<T>) => {
   const {
     control,
     handleSubmit,
@@ -11,7 +11,7 @@ export const useCustomForm = <T extends FieldValues>(schema: yup.ObjectSchema<T>
     reset,
     trigger,
   } = useForm<T>({
-    resolver: yupResolver(schema) as any,
+    resolver: schema ? (yupResolver(schema) as any) : undefined,
     mode: "onChange",
   });
 
