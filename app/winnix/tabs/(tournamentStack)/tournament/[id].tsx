@@ -2,11 +2,11 @@ import { IconName, WinnixIcon } from "@/presentation/plugins/Icon";
 import { Colors, Flex, Fonts } from "@/presentation/styles/global-styles";
 import { CustomFormView } from "@/presentation/theme/components/CustomFormView";
 import { GradientCard } from "@/presentation/theme/components/GradientCard";
-import { ParticipationCard } from "@/presentation/tournamentsView/tournamentsInfo/ParticipationCard";
-import { Activity, RecentActivityCard } from "@/presentation/tournamentsView/tournamentsInfo/RecentActivityCard";
+import { BracketLayout } from "@/presentation/tournamentsView/tournamentsInfo/bracketLayout/BracketLayout";
+import { ResumeLayout } from "@/presentation/tournamentsView/tournamentsInfo/ResumeLayout/ResumeLayout";
 import { TournamentHeaderCard } from "@/presentation/tournamentsView/tournamentsInfo/TournamentHeaderCard";
 import { TournamentMenu } from "@/presentation/tournamentsView/tournamentsInfo/TournamentMenu";
-import { TournamentStatsCard } from "@/presentation/tournamentsView/tournamentsInfo/TournamentStatsCard";
+import { TournamentTeamsLayout } from "@/presentation/tournamentsView/tournamentsInfo/tournamentsTeamsLayout/TournamentTeamsLayout";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
@@ -22,7 +22,7 @@ const TournamentDetails = () => {
   const menuItems = [
     { key: "summary", label: "Resumen", icon: "folder-open-outline" as IconName },
     { key: "teams", label: "Equipos", icon: "people-outline" as IconName },
-    { key: "bracket", label: "Bracket", icon: "flag-outline" as IconName },
+    { key: "bracket", label: "Llaves", icon: "flag-outline" as IconName },
     { key: "info", label: "Info", icon: "information-circle-outline" as IconName },
   ];
 
@@ -48,19 +48,6 @@ const TournamentDetails = () => {
     buttonLabel: "Inscribirse",
     image: require("@/assets/images/imgT.jpg"),
   };
-
-  const statsData = [
-    { label: "Encuentros jugados", value: "12 / 63" },
-    { label: "Goles anotados", value: 120 },
-    { label: "Jugador destacado", value: "Juan Pérez" },
-    { label: "Avance del torneo", value: "20%" },
-  ];
-
-  const recentActivities: Activity[] = [
-    { id: "1", type: "match", title: "Thunder vs Ciber", subtitle: "Partida finalizada" },
-    { id: "2", type: "team", title: "Nuevo equipo registrado: Phoenix Rising hola", subtitle: "Hace 1 hora" },
-    { id: "3", type: "player", title: "Jugador agregado: Juan Pérez", subtitle: "Hace 30 min" },
-  ];
 
   return (
     <CustomFormView>
@@ -121,14 +108,14 @@ const TournamentDetails = () => {
 
           <TournamentMenu activeKey={activeTab} onSelect={(key) => handleChangeView(key)} items={menuItems} />
 
-          {/* Button to register */}
-          <ParticipationCard onPressButton={() => console.log("clic en participacion")} />
+          {/* Section View Summary */}
+          {activeTab === "summary" && <ResumeLayout />}
 
-          {/* Statistics */}
-          <TournamentStatsCard stats={statsData} />
+          {/* Section teams */}
+          {activeTab === "teams" && <TournamentTeamsLayout />}
 
-          {/* Recently Activity */}
-          <RecentActivityCard activities={recentActivities} />
+          {/* Section Bracket */}
+          {activeTab === "bracket" && <BracketLayout />}
         </View>
       </ScrollView>
     </CustomFormView>
