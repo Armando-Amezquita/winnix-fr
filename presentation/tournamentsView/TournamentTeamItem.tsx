@@ -31,7 +31,7 @@ export const TournamentTeamItem = ({ label, onPressCard, onPressFavorite, styleT
   };
 
   return (
-    <View style={[styles.container]}>
+    <View style={[styles.TournamentTeamItem__container]}>
       <View style={[styles.details]}>
         <Image source={typeof img === "string" ? { uri: img } : img || require("../../assets/icons/tournament.png")} style={{ width: 100, height: 80 }} />
 
@@ -69,7 +69,7 @@ export const TournamentTeamItem = ({ label, onPressCard, onPressFavorite, styleT
 };
 
 const styles = StyleSheet.create({
-  container: {
+  TournamentTeamItem__container: {
     display: "flex",
     flexDirection: "column",
     minHeight: 100,

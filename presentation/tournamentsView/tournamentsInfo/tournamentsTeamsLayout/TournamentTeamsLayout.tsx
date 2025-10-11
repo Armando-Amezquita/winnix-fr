@@ -81,7 +81,7 @@ export const TournamentTeamsLayout = () => {
               style={[
                 styles.status,
                 {
-                  backgroundColor: item.status === "active" ? Colors.primary : item.status === "delete" ? Colors.error : Colors.gray,
+                  backgroundColor: item.status === "active" ? Colors.primaryDark2 : item.status === "delete" ? Colors.error : Colors.gray,
                 },
               ]}
             />
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
   },
   status: {
     flex: 3,
-    padding: 8,
+    padding: 6,
     borderRadius: Radius.medium,
   },
   statsRow: {

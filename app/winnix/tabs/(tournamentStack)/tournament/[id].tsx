@@ -1,7 +1,8 @@
 import { IconName, WinnixIcon } from "@/presentation/plugins/Icon";
 import { Colors, Flex, Fonts } from "@/presentation/styles/global-styles";
 import { CustomFormView } from "@/presentation/theme/components/CustomFormView";
-import { GradientCard } from "@/presentation/theme/components/GradientCard";
+import { CustomText } from "@/presentation/theme/components/CustomText";
+import { GradientContainer } from "@/presentation/theme/components/GradientCard";
 import { BracketLayout } from "@/presentation/tournamentsView/tournamentsInfo/bracketLayout/BracketLayout";
 import { ResumeLayout } from "@/presentation/tournamentsView/tournamentsInfo/ResumeLayout/ResumeLayout";
 import { TournamentHeaderCard } from "@/presentation/tournamentsView/tournamentsInfo/TournamentHeaderCard";
@@ -49,6 +50,17 @@ const TournamentDetails = () => {
     image: require("@/assets/images/imgT.jpg"),
   };
 
+  const matches = [
+    { id: 1, teamA: "Storm Raiders", teamB: "Crimson Wolves", scoreA: 2, scoreB: 1, status: "Finalizado" },
+    { id: 2, teamA: "Blue Hawks", teamB: "Iron Titans", scoreA: 1, scoreB: 3, status: "En curso" },
+    { id: 3, teamA: "Shadow Lynx", teamB: "Golden Bulls", scoreA: 0, scoreB: 0, status: "Pendiente" },
+  ];
+  const upcomingMatches = [
+    { id: 1, teamA: "Storm Raiders", teamB: "Ice Breakers", date: "Hoy 16:00", stage: "Semifinal" },
+    { id: 2, teamA: "Thunder Wolves", teamB: "Crimson Hawks", date: "Hoy 18:00", stage: "Semifinal" },
+    { id: 3, teamA: "Shadow Titans", teamB: "Golden Foxes", date: "Mañana 14:30", stage: "Final" },
+  ];
+
   return (
     <CustomFormView>
       <ScrollView>
@@ -87,23 +99,21 @@ const TournamentDetails = () => {
           />
 
           <View style={{ marginVertical: 20, ...Flex.rowCenter, gap: 24 }}>
-            <GradientCard
-              iconName='people-outline'
-              title='Equipos'
-              value='32'
-              colors={["rgba(30,62,166,0.9)", "rgba(77,33,133,0.9)"]}
-              iconBackground={Colors.secondaryDark}
-              borderColor={Colors.secondaryDark}
-            />
+            <GradientContainer colors={["rgba(30,62,166,0.9)", "rgba(77,33,133,0.9)"]} borderColor={Colors.secondaryDark}>
+              {<WinnixIcon name='people-outline' style={[styles.icon, { backgroundColor: Colors.secondaryDark }]} />}
+              <View style={{ gap: 4 }}>
+                <CustomText label='Equipos' size={16} color={Colors.light} />
+                <CustomText label='28' size={22} color={Colors.light} weight={"bold"} />
+              </View>
+            </GradientContainer>
 
-            <GradientCard
-              iconName='trophy-outline'
-              title='Premio'
-              value='100.000'
-              colors={["rgba(234, 132, 10, .6)", "rgba(124, 43, 19, .8)"]}
-              iconBackground='#00c897'
-              titleStyle={{ color: "#00c897" }}
-            />
+            <GradientContainer colors={["rgba(234, 132, 10, .6)", "rgba(124, 43, 19, .8)"]} borderColor='#ddd'>
+              {<WinnixIcon name='people-outline' style={[styles.icon, { backgroundColor: "#00c897" }]} />}
+              <View style={{ gap: 4 }}>
+                <CustomText label='Premio' size={16} color={Colors.primary} />
+                <CustomText label='100.000' size={22} color={Colors.light} weight={"bold"} />
+              </View>
+            </GradientContainer>
           </View>
 
           <TournamentMenu activeKey={activeTab} onSelect={(key) => handleChangeView(key)} items={menuItems} />
@@ -115,7 +125,14 @@ const TournamentDetails = () => {
           {activeTab === "teams" && <TournamentTeamsLayout />}
 
           {/* Section Bracket */}
-          {activeTab === "bracket" && <BracketLayout />}
+          {/* {activeTab === "bracket" && <BracketLayout />} */}
+          {activeTab === "bracket" && (
+            <BracketLayout
+              matches={matches}
+              upcomingMatches={upcomingMatches}
+              // onNavigateToDetails={(id) => navigation.navigate("MatchDetails", { id })}
+            />
+          )}
         </View>
       </ScrollView>
     </CustomFormView>
@@ -172,5 +189,10 @@ const styles = StyleSheet.create({
     width: "90%",
     marginHorizontal: "auto",
     marginVertical: 10,
+  },
+
+  icon: {
+    padding: 10,
+    borderRadius: 12,
   },
 });
