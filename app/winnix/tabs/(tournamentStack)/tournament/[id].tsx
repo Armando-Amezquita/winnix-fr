@@ -3,11 +3,10 @@ import { Colors, Flex, Fonts } from "@/presentation/styles/global-styles";
 import { CustomFormView } from "@/presentation/theme/components/CustomFormView";
 import { CustomText } from "@/presentation/theme/components/CustomText";
 import { GradientContainer } from "@/presentation/theme/components/GradientCard";
-import { BracketLayout } from "@/presentation/tournamentsView/tournamentsInfo/bracketLayout/BracketLayout";
-import { ResumeLayout } from "@/presentation/tournamentsView/tournamentsInfo/ResumeLayout/ResumeLayout";
+import { BracketLayout, InformationTournament, ResumeLayout, TournamentTeamsLayout } from "@/presentation/tournamentsView";
+
 import { TournamentHeaderCard } from "@/presentation/tournamentsView/tournamentsInfo/TournamentHeaderCard";
 import { TournamentMenu } from "@/presentation/tournamentsView/tournamentsInfo/TournamentMenu";
-import { TournamentTeamsLayout } from "@/presentation/tournamentsView/tournamentsInfo/tournamentsTeamsLayout/TournamentTeamsLayout";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
@@ -133,6 +132,8 @@ const TournamentDetails = () => {
               // onNavigateToDetails={(id) => navigation.navigate("MatchDetails", { id })}
             />
           )}
+
+          {activeTab === "info" && <InformationTournament />}
         </View>
       </ScrollView>
     </CustomFormView>
