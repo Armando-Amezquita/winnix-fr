@@ -29,7 +29,6 @@ const CheckAuthenticationLayout = () => {
         headerShown: true,
         headerRight: () => <Button title='Logout' color='red' onPress={logout} />,
       }}>
-      {/* Un Drawer item que apunta al grupo de Tabs */}
       <Drawer.Screen
         name='tabs'
         options={{
@@ -38,7 +37,6 @@ const CheckAuthenticationLayout = () => {
         }}
       />
 
-      {/* Otras pantallas del Drawer */}
       <Drawer.Screen
         name='profile'
         options={{
@@ -52,6 +50,14 @@ const CheckAuthenticationLayout = () => {
         options={{
           drawerLabel: "Settings",
           title: "Settings",
+        }}
+      />
+
+      <Drawer.Screen
+        name='ourTournaments'
+        options={{
+          drawerLabel: "Mis torneos",
+          title: "Test",
         }}
       />
     </Drawer>

@@ -1,8 +1,10 @@
+import { useTranslation } from "@/i18n/hooks/useTranslation";
 import { IconName, WinnixIcon } from "@/presentation/plugins/Icon";
 import { Colors, Flex, Fonts, Radius } from "@/presentation/styles/global-styles";
+import { CustomButton } from "@/presentation/theme/components/CustomButton";
+import { CustomText } from "@/presentation/theme/components/CustomText";
 import { useState } from "react";
-import { Image, ImageSourcePropType, Pressable, StyleProp, StyleSheet, Text, TextStyle, View, ViewStyle } from "react-native";
-import { CustomButton } from "../theme/components/CustomButton";
+import { Image, ImageSourcePropType, Pressable, StyleProp, StyleSheet, TextStyle, View, ViewStyle } from "react-native";
 import { InfoCard } from "./InfoCard";
 
 interface Props {
@@ -24,6 +26,7 @@ interface Props {
 
 export const TournamentTeamItem = ({ label, onPressCard, onPressFavorite, styleText, img, state, stats }: Props) => {
   const [favorite, setFavorite] = useState<boolean>(false);
+  const { t } = useTranslation("tournaments");
 
   const handleSaveFavorite = () => {
     setFavorite(!favorite);
@@ -41,29 +44,29 @@ export const TournamentTeamItem = ({ label, onPressCard, onPressFavorite, styleT
         </Pressable>
 
         <View>
-          <Text numberOfLines={1} ellipsizeMode='tail' style={[styles.label, styleText]}>
-            {label}
-          </Text>
-          <Text
+          <CustomText label={label} numberOfLines={1} ellipsizeMode='tail' style={[styles.label, styleText]} />
+
+          <View
             style={[
               styles.state,
               {
-                backgroundColor: state === "in-progress" ? Colors.primaryDark2 : Colors.secondary,
-                color: state === "in-progress" ? Colors.primary : Colors.secondaryLigth,
+                backgroundColor: state === "published" ? Colors.primaryDark2 : Colors.secondary,
               },
             ]}>
-            {state}
-          </Text>
+            <CustomText size={14} weight={"bold"} label={t(`status.published`)} color={state === "published" ? Colors.primary : Colors.secondaryLigth} />
+          </View>
         </View>
       </View>
 
-      <View style={styles.tournamentTeamItem__CardContainer}>
-        {stats.map((stat) => (
-          <InfoCard key={stat._id} iconName={stat.iconName} title={stat.title} value={stat.value} iconColor={stat.iconColor} />
-        ))}
-      </View>
+      {stats && stats.length && (
+        <View style={styles.tournamentTeamItem__CardContainer}>
+          {stats.map((stat) => (
+            <InfoCard key={stat._id} iconName={stat.iconName} title={stat.title} value={stat.value} iconColor={stat.iconColor} />
+          ))}
+        </View>
+      )}
 
-      <CustomButton label='Ver mas' onPress={onPressCard} stylePressable={styles.tournamentTeamItem__CardAction} styleText={styles.tournamentTeamItem__CardActionText} />
+      <CustomButton label={t("common:more")} onPress={onPressCard} stylePressable={styles.tournamentTeamItem__CardAction} styleText={styles.tournamentTeamItem__CardActionText} />
     </View>
   );
 };
