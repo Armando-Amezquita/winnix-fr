@@ -1,0 +1,13 @@
+{
+  "published": "Published",
+  "draft": "Draft",
+  "active": "Active",
+  "inactive": "Inactive",
+  "pending": "Pending",
+  "completed": "Completed",
+  "cancelled": "Cancelled",
+  "inProgress": "In Progress",
+  "finished": "Finished",
+  "upcoming": "Upcoming",
+  "ongoing": "Ongoing"
+}

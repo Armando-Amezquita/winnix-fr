@@ -1,0 +1,22 @@
+{
+  "welcome": "Bienvenid@",
+  "loading": "Cargando...",
+  "error": "Error",
+  "success": "Éxito",
+  "cancel": "Cancelar",
+  "confirm": "Confirmar",
+  "save": "Guardar",
+  "delete": "Eliminar",
+  "edit": "Editar",
+  "search": "Buscar",
+  "filter": "Filtrar",
+  "close": "Cerrar",
+  "back": "Volver",
+  "next": "Siguiente",
+  "previous": "Anterior",
+  "submit": "Enviar",
+  "retry": "Reintentar",
+  "noData": "No hay datos disponibles",
+  "noResults": "No se encontraron resultados",
+  "more": "Ver mas"
+}

@@ -1,0 +1,33 @@
+{
+  "title": "Torneos",
+  "ourTournaments": {
+    "title": "Mis Torneos",
+    "createTournament": "Crear Torneo",
+    "tournamentName": "Nombre del Torneo",
+    "tournamentNamePlaceholder": "Copa gaming 2025",
+    "active": "Activos",
+    "finished": "Finalizados",
+    "noTournaments": "No tienes torneos creados",
+    "searchPlaceholder": "Escribe aquí..."
+  },
+  "list": {
+    "participants": "Participantes",
+    "teams": "equipos",
+    "active": "activos",
+    "prize": "Premio"
+  },
+  "status": {
+    "draft": "Boceto",
+    "published": "En progreso",
+    "registration_open": "Registro abierto",
+    "registration_closed": "Registro cerrado",
+    "completed": "Finalizado",
+    "cancelled": "Cancelado"
+  },
+  "details": {
+    "information": "Información",
+    "teams": "Equipos",
+    "bracket": "Llaves",
+    "resume": "Resumen"
+  }
+}

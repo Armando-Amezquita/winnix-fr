@@ -1,14 +1,17 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
+import { useTranslation } from "@/i18n/hooks/useTranslation";
 import { useLogin } from "@/presentation/hooks/auth/login/useLogin";
 import { Colors, Fonts } from "@/presentation/styles/global-styles";
 import { CustomButton } from "@/presentation/theme/components/CustomButton";
 import { CustomFormView } from "@/presentation/theme/components/CustomFormView";
 import { CustomInput } from "@/presentation/theme/components/CustomInput";
 import { CustomLink } from "@/presentation/theme/components/CustomLink";
+import { CustomText } from "@/presentation/theme/components/CustomText";
 
 const Login = () => {
+  const { t } = useTranslation("auth");
   const {
     // Properties
     //Methods
@@ -23,35 +26,19 @@ const Login = () => {
   return (
     <CustomFormView>
       <View style={styles.view}>
-        <Text style={styles.title}>Bienvenid@</Text>
+        <CustomText style={styles.title} label={t("login.title")} />
 
-        <CustomInput
-          name='email'
-          control={control}
-          placeholder='ejemplo@google.com'
-          label='Usuario o correo electrónico'
-          iconRight='mail-outline'
-          keyboardType='email-address'
-          errorMessage={errors.email?.message}
-        />
+        <CustomInput name='email' control={control} placeholder={t("login.emailPlaceholder")} label={t("login.emailLabel")} iconRight='mail-outline' keyboardType='email-address' errorMessage={errors.email?.message} />
 
-        <CustomInput
-          name='password'
-          control={control}
-          placeholder='Contraseña'
-          label='Contraseña'
-          iconRight='eye-off-outline'
-          isPassword
-          errorMessage={errors.password?.message}
-        />
+        <CustomInput name='password' control={control} placeholder={t("login.passwordPlaceholder")} label={t("login.passwordLabel")} iconRight='eye-off-outline' isPassword errorMessage={errors.password?.message} />
 
-        <CustomLink label='Recordar contraseña' href='/' style={styles.rememberPassword} />
+        <CustomLink label={t("login.rememberPassword")} href='/' style={styles.rememberPassword} />
 
-        <CustomButton label={isSubmitting ? "Ingresando..." : "Ingresar"} onPress={handleSubmit(onLogin)} icon='football-outline' disabled={isDisabled || isSubmitting} />
+        <CustomButton label={isSubmitting ? t("login.submitting") : t("login.submitButton")} onPress={handleSubmit(onLogin)} icon='football-outline' disabled={isDisabled || isSubmitting} />
 
         <View style={styles.signUpContainer}>
-          <Text style={styles.signUpText}>¿No tienes cuenta?</Text>
-          <CustomLink label='Registrate' href='/auth/register' />
+          <CustomText style={styles.signUpText} label={t("login.noAccount")} />
+          <CustomLink label={t("login.signUp")} href='/auth/register' />
         </View>
       </View>
     </CustomFormView>
@@ -74,6 +61,7 @@ const styles = StyleSheet.create({
     fontSize: Fonts.extraLarge,
     fontWeight: "bold",
     color: Colors.primary,
+    paddingTop: 20,
   },
   rememberPassword: {
     width: "auto",

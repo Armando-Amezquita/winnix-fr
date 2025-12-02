@@ -3,6 +3,7 @@ import { router, useRouter } from "expo-router";
 import { Alert } from "react-native";
 
 import { useCustomForm } from "@/hooks/useCustomForm";
+import { useTranslation } from "@/i18n/hooks/useTranslation";
 import { useAuthStore } from "@/presentation/auth/store/useAuthStore";
 import { loginSchema } from "@/presentation/schemas/loginSchema";
 import { LoginFormData } from "@/presentation/types/LoginFormData";
@@ -10,6 +11,7 @@ import { LoginFormData } from "@/presentation/types/LoginFormData";
 export const useLogin = () => {
   const { login } = useAuthStore();
   const navigate = useRouter();
+  const { t } = useTranslation("auth");
   const { control, handleSubmit, errors, isSubmitting, isDisabled } = useCustomForm<LoginFormData>(loginSchema);
 
   const onLogin = async (payload: LoginFormData) => {
@@ -20,7 +22,7 @@ export const useLogin = () => {
       router.replace("/winnix/tabs/dashboard");
       return;
     }
-    Alert.alert("Error", "credenciales no validas");
+    Alert.alert(t("common:error"), t("login.invalidCredentials"));
   };
 
   return {

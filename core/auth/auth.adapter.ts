@@ -1,5 +1,5 @@
 import { SecureStorageAdapter } from "@/helpers/adapters/secure-storage.adapter";
-import { authFetcher, privateFetcher } from "./api.config";
+import { authFetcher, privateFetcher } from "../api/api.config";
 
 type LoginPayload = {
   email: string;

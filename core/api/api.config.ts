@@ -4,10 +4,9 @@ import { Platform } from "react-native";
 
 const STAGE = process.env.EXPO_PUBLIC_STATE || "dev";
 
-export const API_URL =
-  STAGE === "prod" ? process.env.EXPO_PUBLIC_API_URL : Platform.OS === "ios" ? process.env.EXPO_PUBLIC_API_IOS : process.env.EXPO_PUBLIC_API_URL_ANDROID;
+export const API_URL = STAGE === "prod" ? process.env.EXPO_PUBLIC_API_URL : Platform.OS === "ios" ? process.env.EXPO_PUBLIC_API_IOS : process.env.EXPO_PUBLIC_API_URL_ANDROID;
 
-const API_BASE_URL = "http://192.168.10.12:7002/api";
+const API_BASE_URL = "http://192.168.10.24:7002/api";
 
 // Instancia pública (login, register, forgotPassword...)
 export const authFetcher = new AxiosAdapter({
@@ -28,6 +27,7 @@ export const privateFetcher = new AxiosAdapter({
 // Agregamos interceptor SOLO a la privada
 privateFetcher.instance.interceptors.request.use(async (config) => {
   const token = await SecureStorageAdapter.getItem("accessToken");
+  console.log("token :>> ", token);
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;

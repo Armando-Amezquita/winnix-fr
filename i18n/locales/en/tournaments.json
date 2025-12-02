@@ -1,0 +1,33 @@
+{
+  "title": "Tournaments",
+  "ourTournaments": {
+    "title": "My Tournaments",
+    "createTournament": "Create Tournament",
+    "tournamentName": "Tournament Name",
+    "tournamentNamePlaceholder": "Gaming Cup 2025",
+    "active": "Active",
+    "finished": "Finished",
+    "noTournaments": "You haven't created any tournaments",
+    "searchPlaceholder": "Type here..."
+  },
+  "list": {
+    "participants": "Participants",
+    "teams": "teams",
+    "active": "active",
+    "prize": "Prize"
+  },
+  "status": {
+    "draft": "Draft",
+    "published": "In Progress",
+    "registration_open": "Registration open",
+    "registration_closed": "Registration closed",
+    "completed": "Finalized",
+    "cancelled": "Cancelled"
+  },
+  "details": {
+    "information": "Information",
+    "teams": "Teams",
+    "bracket": "Bracket",
+    "resume": "Resume"
+  }
+}
